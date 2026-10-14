@@ -5,10 +5,42 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bank-system"
 version = "0.1.0"
-description = "Система банківських рахунків для лабораторної роботи №1"
+description = "Система банківських рахунків для лабораторної роботи №4"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []
 
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.10",
+]
+
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+warn_return_any = true
+
+# Ігноруємо старі файли з 3-ї лаби, якщо вони не типізовані суворо
+[[tool.mypy.overrides]]
+module = "bank_system.data"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "bank_system.decorators"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "bank_system.streaming"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "bank_system.processors"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "bank_system.analytics"
+ignore_errors = true
